@@ -1,6 +1,6 @@
 version: '3'
 services:
   server:
-    image:  web_server
+    image: jskonst/tmp
     ports:
-      - 3000:3000
+      - 4000:3000
