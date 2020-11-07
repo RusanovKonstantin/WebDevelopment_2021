@@ -1,6 +1,38 @@
 version: '3'
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: example
+  # volumes:
+  #   - ./folder:/container_folder
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
   server:
-    image: jskonst/tmp
+    env_file: .env
+    build: 
+      context: ./server/
+      dockerfile: ./server.dockerfile
+    image: jskonst/web-app/server
+    environment:
+      - SOME_VAR=my_var
     ports:
       - 4000:3000
+    depends_on:
+      - db
+      
+  client:
+    env_file: .env
+    build: 
+      context: ./client/
+      dockerfile: ./client.dockerfile
+    image: jskonst/web-app/client
+    environment:
+      - SOME_VAR=another_var
+    ports:
+      - 5000:3000
+    depends_on:
+      - server

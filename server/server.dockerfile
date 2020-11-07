@@ -1,6 +1,6 @@
 FROM node:alpine
 WORKDIR /app
-COPY ./server/package*.json ./
+COPY ./package*.json ./
 RUN npm install
-COPY ./server/ ./
+COPY ./ ./
 ENTRYPOINT npm run start:dev
