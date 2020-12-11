@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+
+  const [name, setName] = useState("");
+
   useEffect(() => {
-    fetch("/api/demo")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    console.log("Fetching");
   }, []);
 
-  return <>Hello</>;
+  return (
+    <>
+      {`Hello Demo App ${name}`}
+    </>
+  );
 }
 
 export default App;

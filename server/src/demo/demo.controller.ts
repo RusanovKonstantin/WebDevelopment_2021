@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 
-@Controller('/api/demo')
+@Controller('demo')
 export class DemoController {
   constructor() {}
 
   @Get()
   getHello(): any {
-    return {"some": 2, "name": "sdfsdf"};
+    return {"some": 2, "name": "Server"};
   }
 }

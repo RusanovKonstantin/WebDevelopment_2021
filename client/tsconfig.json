@@ -8,7 +8,7 @@
     ],
     "allowJs": true,
     "experimentalDecorators": true,
-    "noUnusedLocals": true,
+    // "noUnusedLocals": true,
     "sourceMap": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
