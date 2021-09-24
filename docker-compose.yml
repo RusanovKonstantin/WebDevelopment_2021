@@ -4,7 +4,7 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: example
-       ports:
+    ports:
       - 5432:5432
   # volumes:
   #   - ./folder:/container_folder
