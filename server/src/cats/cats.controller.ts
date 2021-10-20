@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Query } from '@nestjs/common';
+import { Controller, Get, Post, Query, Body } from '@nestjs/common';
+import { CatDto } from './dto/cat-dto';
 
 @Controller('cats')
 export class CatsController 
@@ -12,8 +13,10 @@ export class CatsController
     }
 
     @Post()
-    createCat():string
+    createCat(@Body() cat: CatDto):CatDto
     {
-        return "Will create cat"
+        console.log(cat);
+        console.log(cat.age +1);
+        return cat;
     }
 }
