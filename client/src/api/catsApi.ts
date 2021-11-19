@@ -5,7 +5,7 @@ export interface Cat {
     color: string;
 }
 
-export const  getCats = (): Cat[] => {
+export const  getCats = (): Promise<Cat[]> => {
     const cats:Cat[] = [
         {
             name: "Murzik",
@@ -17,6 +17,15 @@ export const  getCats = (): Cat[] => {
             age: 5,
             color: "Three Color"
         }
-    ]
-    return cats;
+    ];
+
+    const promise = new Promise<Cat[]>((res, rej) => {
+        setTimeout(()=> {
+            res(cats);
+        },3000
+        )
+    });
+
+   
+    return promise;
 }
