@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { getCats, Cat as ICat } from '../../api/catsApi';
+import { getCats, Cat as ICat, getCatsApi } from '../../api/catsApi';
 import Cat from './Cat'
 import { CircularProgress } from "@material-ui/core";
 
@@ -9,7 +9,7 @@ export default function CatsList() {
     
     useEffect(() => {
         const getData = async () =>{
-            const cats = await getCats();
+            const cats = await getCatsApi();
             setcats(cats);           
         }
         getData();

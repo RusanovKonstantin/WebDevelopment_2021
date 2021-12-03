@@ -5,6 +5,13 @@ export interface Cat {
     color: string;
 }
 
+export const  getCatsApi = async (): Promise<Cat[]> =>{
+    const res = await fetch("/api/cats");
+    const cats = await res.json() as Cat[];
+    return cats;
+
+}
+
 export const  getCats = (): Promise<Cat[]> => {
     const cats:Cat[] = [
         {
