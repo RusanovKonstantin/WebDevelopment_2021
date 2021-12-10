@@ -26,8 +26,8 @@ export class CatsController {
     }
 
     @Get(':id')
-    findOne(@Param() params): CatDto {
-       const cat = this.cats.find(cat => cat.id === +params.id);
+    async findOne(@Param() params) {
+       const cat = this.catsService.findOne(+params.id);
        if (cat){
            return cat;
        }
@@ -35,32 +35,30 @@ export class CatsController {
     }
 
     @Post()
-    createCat(@Body() cat: CatDto): CatDto {
-        const id = this.cats.length + 1;
-        cat.id = id;
-        this.cats.push(cat);        
-        return cat;
+    async createCat(@Body() cat: CatDto) {
+         return this.catsService.addCat(cat)
     }
 
     
-    @Put()
-    UpdateOne(@Body() cat: CatDto): CatDto {
-       const foundCat = this.cats.find(item => item.id === cat.id);
-       if (foundCat){
-           this.cats[foundCat.id - 1] = cat;
-           return this.cats[foundCat.id - 1];
-       }
-       throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+    @Put(':id')
+    async UpdateOne(@Param() params, @Body() cat: CatDto) {
+      const dbCat = this.catsService.update(+params.id,cat);
+      if (dbCat){
+          return dbCat;
+      }       
+        throw new HttpException('Not found', HttpStatus.NOT_FOUND);
     }
 
     @Delete(':id')
     @HttpCode(202)
-    delete(@Param() params){
-        const lengthBefore = this.cats.length;
-        this.cats = this.cats.filter(item => item.id !== +params.id);
-        if (lengthBefore === this.cats.length){
+    async delete(@Param() params){
+       
+       const result =  await this.catsService.remove(+params.id);
+        if (!result.affected){
             throw new HttpException('Not found', HttpStatus.NOT_FOUND);
         }
+        
+        
         
     }
 }
